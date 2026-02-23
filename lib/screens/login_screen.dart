@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import 'home_screen.dart';
 import 'signup_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,12 +14,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final AuthService _authService = AuthService();
-
   bool isLoading = false;
 
   void login() async {
     setState(() => isLoading = true);
-
     try {
       await _authService.login(
         emailController.text.trim(),
@@ -31,11 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
-
     setState(() => isLoading = false);
   }
 
@@ -71,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               },
               child: const Text("Don't have an account? Sign Up"),
-            )
+            ),
           ],
         ),
       ),
